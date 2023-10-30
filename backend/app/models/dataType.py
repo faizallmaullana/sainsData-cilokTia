@@ -4,6 +4,8 @@ from app import db
 from datetime import datetime
 import uuid
 import pytz
+from sqlalchemy.orm import relationship
+
 
 class Data_Type():
     def string():
@@ -22,3 +24,15 @@ class Data_Type():
         jakartaZone = pytz.timezone('Asia/Jakarta')
         dbase = db.Column(db.DateTime, default=datetime.now(jakartaZone))
         return dbase
+
+
+class Relations():
+    # foreign_key('others tableName.id_name')
+    def foreign_key(table):
+        foreign_key = db.Column(db.String(36), db.ForeignKey(table))
+        return foreign_key
+
+    # relation (relations_tableName, this_tableName)
+    def relation(a, b):
+        relation = relationship(a, backref=b, lazy=True)
+        return relation
