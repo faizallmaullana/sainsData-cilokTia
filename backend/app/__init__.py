@@ -11,6 +11,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     db.init_app(app)
+    
     from app.models.pedagang import Data_pedagang
     Migrate(app, db)
 

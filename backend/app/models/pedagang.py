@@ -24,4 +24,12 @@ class Data_dagangan(db.Model, Base):
     banyak_dagangan = Data_Type.integer()
     
     created_at = Data_Type.time_now()
-    
+
+
+class Data_setoran(db.Model, Base):
+    __tablename__ = 'data_setoran'
+
+    id_setoran = Data_Type.id()
+    jumlah_setoran = Data_Type.integer()
+
+    created_at = Data_Type.time.now()
