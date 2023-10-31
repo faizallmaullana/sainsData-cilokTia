@@ -40,3 +40,6 @@ class Data_setoran(db.Model, Base):
 
     # foreignkey
     id_pedagang = Relations.foreign_key('data_pedagang.id_pedagang')
+
+
+# ade farhan is on game
