@@ -25,6 +25,10 @@ class Data_Type():
         dbase = db.Column(db.DateTime, default=datetime.now(jakartaZone))
         return dbase
 
+    def date():
+        dbase = db.Column(db.DateTime)
+        return dbase
+
 
 class Relations():
     # foreign_key('others tableName.id_name')

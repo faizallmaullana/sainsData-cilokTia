@@ -13,11 +13,11 @@ class Data_pedagang(db.Model, Base):
     nama_pedagang = Data_Type.string()
     alamat_pedagang = Data_Type.string()
     created_at = Data_Type.time_now()
-    delete_at = Data_Type.time_now()
+    is_deleted = Data_Type.integer()
     
     # relationship
-    id_dagangan = Relations.relation('data_dagangan', 'data_pedagang')
-    id_setoran = Relations.relation('data_setoran', 'data_pedagang')
+    # id_dagangan = Relations.relation('data_dagangan', 'data_pedagang')
+    # id_setoran = Relations.relation('data_setoran', 'data_pedagang')
 
 
 class Data_dagangan(db.Model, Base):
@@ -40,6 +40,3 @@ class Data_setoran(db.Model, Base):
 
     # foreignkey
     id_pedagang = Relations.foreign_key('data_pedagang.id_pedagang')
-
-
-# ade farhan is on game
