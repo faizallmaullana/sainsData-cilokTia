@@ -26,6 +26,9 @@ class DaganganResource(Resource):
         return {
             "msg": "created",
             "status_code": 201,
+            "data": {
+                "id_dagangan": value.id_dagangan
+            }
         }, 201
 
 
@@ -58,3 +61,31 @@ class DaganganResource(Resource):
         }, 200
 
     
+    def put(self, id_dagangan):
+        data = Data_dagangan.query.filter_by(id_dagangan=id_dagangan).first()
+
+        #####
+        banyak_dagangan = request.json.get("banyak_dagangan", data.banyak_dagangan)
+        #####
+
+        data.banyak_dagangan = banyak_dagangan
+        db.session.commit()
+
+        return {
+            "msg": "changed",
+            "status_code": 201,
+            "data": {
+                "id_dagangan": data.id_dagangan
+            }
+        }
+
+    def delete(self, id_dagangan):
+        data = Data_dagangan.query.filter_by(id_dagangan=id_dagangan).first()
+
+        db.session.delete(data)
+        db.session.commit()
+
+        return {
+            "msg": "deleted",
+            "status_code": 201,
+        }, 201

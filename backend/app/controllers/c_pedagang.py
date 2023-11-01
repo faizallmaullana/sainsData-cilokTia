@@ -13,6 +13,7 @@ class PedagangResource(Resource):
         value = Data_pedagang(
             nama_pedagang=nama_pedagang,
             alamat_pedagang=alamat_pedagang,
+            is_deleted=0
             )
 
         db.session.add(value)
@@ -20,7 +21,10 @@ class PedagangResource(Resource):
 
         return {
             "msg": "created",
-            "status_code": 201
+            "status_code": 201,
+            "data": {
+                "id_pedagang": value.id_pedagang
+            }
         }, 201
 
     def get(self):
@@ -28,12 +32,13 @@ class PedagangResource(Resource):
         result = []
 
         for data in datas:
-            result.append({
-                "id_pedagang": data.id_pedagang,
-                "nama_pedagang": data.nama_pedagang,
-                "alamat_pedagang": data.alamat_pedagang,
-                "created_at": data.created_at.strftime("%d-%m-%Y")
-            })
+            if data.is_deleted == 0:
+                result.append({
+                    "id_pedagang": data.id_pedagang,
+                    "nama_pedagang": data.nama_pedagang,
+                    "alamat_pedagang": data.alamat_pedagang,
+                    "created_at": data.created_at.strftime("%d-%m-%Y")
+                })
 
         return {
             "msg": "ok",
@@ -66,10 +71,10 @@ class PedagangResource(Resource):
     def delete(self, id_pedagang):
         data = Data_pedagang.query.filter_by(id_pedagang=id_pedagang).first()
 
-        db.session.delete(data)
+        data.is_deleted = 1
         db.session.commit()
 
         return {
             "msg": "deleted",
-            "status_code": 204
-        }, 204
+            "status_code": 201
+        }, 201
