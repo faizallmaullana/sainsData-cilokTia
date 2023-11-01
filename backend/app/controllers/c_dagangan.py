@@ -19,7 +19,7 @@ class DaganganResource(Resource):
             id_pedagang=id_pedagang,
             banyak_dagangan=banyak_dagangan
         )
-
+        
         db.session.add(value)
         db.session.commit()
         
@@ -77,7 +77,7 @@ class DaganganResource(Resource):
             "data": {
                 "id_dagangan": data.id_dagangan
             }
-        }
+        }, 201
 
     def delete(self, id_dagangan):
         data = Data_dagangan.query.filter_by(id_dagangan=id_dagangan).first()

@@ -1,7 +1,6 @@
 from flask import jsonify, request
 from flask_restful import Resource
-from app.models.pedagang import Data_pedagang
-from app import db
+from app.models.pedagang import *
 
 class PedagangResource(Resource):
     def post(self):
